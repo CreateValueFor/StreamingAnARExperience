@@ -34,26 +34,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mtkView contentMode="scaleToFill" colorPixelFormat="BGRA8Unorm" depthStencilPixelFormat="Depth32Float" translatesAutoresizingMaskIntoConstraints="NO" id="Tae-rn-soD">
-                                <rect key="frame" x="448" y="162" width="448" height="252"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="252" id="NaG-94-T7M"/>
-                                    <constraint firstAttribute="width" constant="448" id="VoR-ia-RR4"/>
-                                </constraints>
-                            </mtkView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="ZMR-B5-O3j">
                                 <rect key="frame" x="68" y="338" width="760" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJG-Im-iti">
-                                        <rect key="frame" x="0.0" y="0.0" width="236" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="170.5" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="소켓 연결 "/>
                                         <connections>
                                             <action selector="connectSocket:" destination="XkX-3i-VuB" eventType="touchUpInside" id="GfJ-lo-k29"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ri-KZ-KBF">
+                                        <rect key="frame" x="196.5" y="0.0" width="170.5" height="31"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="소켓 종료"/>
+                                        <connections>
+                                            <action selector="disConnectSocket:" destination="XkX-3i-VuB" eventType="touchUpInside" id="1EK-c5-enS"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZl-mX-Zbi">
-                                        <rect key="frame" x="262" y="0.0" width="236" height="31"/>
+                                        <rect key="frame" x="393" y="0.0" width="170.5" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="송신 시작"/>
                                         <connections>
@@ -61,7 +62,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9yt-aN-cSy">
-                                        <rect key="frame" x="524" y="0.0" width="236" height="31"/>
+                                        <rect key="frame" x="589.5" y="0.0" width="170.5" height="31"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="송신 종료"/>
                                         <connections>
@@ -75,10 +76,8 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="2jw-nm-eLQ" firstAttribute="trailing" secondItem="ZMR-B5-O3j" secondAttribute="trailing" constant="24" id="2fG-8i-R9s"/>
-                            <constraint firstItem="Tae-rn-soD" firstAttribute="trailing" secondItem="sTZ-ag-Yxd" secondAttribute="trailing" id="6OE-Pa-gSH"/>
                             <constraint firstItem="2jw-nm-eLQ" firstAttribute="bottom" secondItem="ZMR-B5-O3j" secondAttribute="bottom" constant="24" id="Psa-Pb-EAI"/>
                             <constraint firstItem="ZMR-B5-O3j" firstAttribute="leading" secondItem="2jw-nm-eLQ" secondAttribute="leading" constant="24" id="YYA-1t-va4"/>
-                            <constraint firstAttribute="bottom" secondItem="Tae-rn-soD" secondAttribute="bottom" id="cel-kQ-MZs"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -18,7 +18,6 @@
 		377F30D624EE351A00DA673C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 377F30D524EE351A00DA673C /* Assets.xcassets */; };
 		377F30D924EE351A00DA673C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 377F30D724EE351A00DA673C /* LaunchScreen.storyboard */; };
 		377F30E124EE357900DA673C /* VideoFrameData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377F30E024EE357900DA673C /* VideoFrameData.swift */; };
-		377F30E324EE3F2200DA673C /* MultipeerSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377F30E224EE3F2200DA673C /* MultipeerSession.swift */; };
 		377F310A24EECFDE00DA673C /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 377F310824EECFDE00DA673C /* Shaders.metal */; };
 		377F310D24EED11800DA673C /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 377F310C24EED11800DA673C /* Renderer.swift */; };
 		3796E646251D0B900092F55A /* OverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3796E645251D0B900092F55A /* OverlayViewController.swift */; };
@@ -31,6 +30,7 @@
 		80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80557AC325165E3000D9991B /* VideoProcessor.swift */; };
 		BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77E9E92812F6EC007691AE /* SocketIO.framework */; };
 		BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B73E28140C51001DBD39 /* SocketManager.swift */; };
+		BAB7B74228145DED001DBD39 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74128145DED001DBD39 /* DepthMap.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,7 +48,6 @@
 		377F30D824EE351A00DA673C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		377F30DA24EE351A00DA673C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		377F30E024EE357900DA673C /* VideoFrameData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFrameData.swift; sourceTree = "<group>"; };
-		377F30E224EE3F2200DA673C /* MultipeerSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipeerSession.swift; sourceTree = "<group>"; };
 		377F310824EECFDE00DA673C /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
 		377F310924EECFDE00DA673C /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		377F310B24EECFEF00DA673C /* SteamingARFramesLocally-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SteamingARFramesLocally-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -65,6 +64,7 @@
 		BA77E9E92812F6EC007691AE /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9B24A90C4C8B3827F050AE /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		BAB7B73E28140C51001DBD39 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		BAB7B74128145DED001DBD39 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
 		F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Stream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -129,11 +129,11 @@
 		377F30CB24EE351800DA673C /* StreamingARFramesLocally */ = {
 			isa = PBXGroup;
 			children = (
+				BAB7B74128145DED001DBD39 /* DepthMap.swift */,
 				377F30CE24EE351800DA673C /* ViewController.swift */,
 				3796E645251D0B900092F55A /* OverlayViewController.swift */,
 				BAB7B73E28140C51001DBD39 /* SocketManager.swift */,
 				80557AC325165E3000D9991B /* VideoProcessor.swift */,
-				377F30E224EE3F2200DA673C /* MultipeerSession.swift */,
 				377F30E024EE357900DA673C /* VideoFrameData.swift */,
 				37A0A6FD2522670F00DFBA63 /* Utilities */,
 				37791E2325191E880016631C /* Renderer */,
@@ -315,12 +315,12 @@
 				37791E1F25191DED0016631C /* RenderDestination.swift in Sources */,
 				377F310A24EECFDE00DA673C /* Shaders.metal in Sources */,
 				377F30CF24EE351800DA673C /* ViewController.swift in Sources */,
+				BAB7B74228145DED001DBD39 /* DepthMap.swift in Sources */,
 				37A0A6FF2522672400DFBA63 /* SIMD+Extensions.swift in Sources */,
 				377F310D24EED11800DA673C /* Renderer.swift in Sources */,
 				80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */,
 				3796E646251D0B900092F55A /* OverlayViewController.swift in Sources */,
 				377F30CD24EE351800DA673C /* AppDelegate.swift in Sources */,
-				377F30E324EE3F2200DA673C /* MultipeerSession.swift in Sources */,
 				377F30E124EE357900DA673C /* VideoFrameData.swift in Sources */,
 				37A0A7032522676A00DFBA63 /* Ray.swift in Sources */,
 				BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */,

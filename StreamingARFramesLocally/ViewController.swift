@@ -20,29 +20,15 @@ class ViewController: UIViewController, ARSessionDelegate {
     
     // declare scoket
     let manager  = SocketManager(socketURL: URL(string:"ws://192.168.0.22:5500")!,config: [.log(true), .compress])
-    
-    
-//    let socket = SocketIOManager.sharedInstance
-    
+    var socket:SocketIOClient!
+    var socketStarted =  false
     
     
     // A weak reference to the root view controller of the overlay window.
     weak var overlayViewController: OverlayViewController?
 
-    // Manages the multipeer connectivity session.
-//    lazy var multipeerSession = MultipeerSession(receivedDataHandler: receivedData,
-//                                                 peerDiscoveredHandler: peerDiscovered)
-//    
     // Video compressor/decompressor.
     let videoProcessor = VideoProcessor()
-    
-    // An entity that represents the location that the connected peer taps in the scene.
-    let marker: AnchorEntity = {
-        let entity = AnchorEntity()
-        entity.addChild(ModelEntity(mesh: .generateSphere(radius: 0.05)))
-        entity.isEnabled = false
-        return entity
-    }()
     
     // A tracked ray cast for placing the marker.
     private var trackedRaycast: ARTrackedRaycast?
@@ -51,45 +37,75 @@ class ViewController: UIViewController, ARSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UIApplication.shared.isIdleTimerDisabled = true
-        let socket = manager.defaultSocket
-        
-        socket.connect()
-        if(socket.status == .connected){
-            print("소켓 연결 성공")
+        func buildConfigure() -> ARWorldTrackingConfiguration {
+            let configuration = ARWorldTrackingConfiguration()
+
+            configuration.environmentTexturing = .automatic
+            if type(of: configuration).supportsFrameSemantics(.sceneDepth) {
+               configuration.frameSemantics = .sceneDepth
+            }
+
+            return configuration
         }
-        print("소켓 이벤트 발생시키기")
-        socket.emit("connection")
+        super.viewDidLoad()
         
-        // Configure the arView.
         arView.session.delegate = self
+        let configuration = buildConfigure()
+        arView.session.run(configuration)
         
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+        connectSocket()
+//        sendStart()
+        
+        
+        
+        
+
         // Configure the scene.
-        arView.scene.addAnchor(marker)
+//        arView.scene.addAnchor(marker)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Make sure that the app delegate is of type AppDelegate")
         }
         overlayViewController = appDelegate.overlayWindow?.rootViewController as? OverlayViewController
         
-//        overlayViewController?.multipeerSession = multipeerSession
-        
         // Start ReplayKit capture and handle receiving video sample buffers.
+    
         RPScreenRecorder.shared().startCapture {
             [self] (sampleBuffer, type, error) in
             if type == .video {
                 guard let currentFrame = arView.session.currentFrame else { return }
+                
+                
+                videoProcessor.compressAndSend(currentFrame.sceneDepth?.depthMap!, arFrame: currentFrame){
+                    (data) in
+                    self.socket.emit("data",data)
+                }
+                
+                
                 videoProcessor.compressAndSend(sampleBuffer, arFrame: currentFrame) {
                     (data) in
-                    socket.emit("data", data)
-//                    print(data)
-                        
-//                    multipeerSession.sendToAllPeers(data, reliably: true)
+                        guard let depthData = currentFrame.sceneDepth  else {return}
+                        guard let capturedImage = currentFrame.capturedImage else {return}
+//                    let depthMap = DepthMapData(depthData: depthData)
+//                    let jsonDepthMap =  JSONSerialization.jsonObject(with: depthData.depthMap)
+                    print(depthData.depthMap)
+//                        self.socket.emit("data", data)
+
+//                    self.socket.emit("data",depthData)
+                    
+
+                    
+
                 }
             }
         }
     }
     
     // MARK: - ARSessionDelegate
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        <#code#>
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user.
@@ -109,6 +125,10 @@ class ViewController: UIViewController, ARSessionDelegate {
                 guard let configuration = arView.session.configuration else {
                     fatalError("ARSession does not have a configuration.")
                 }
+                print(configuration.frameSemantics)
+                configuration.frameSemantics.insert(.sceneDepth)
+                
+                
                 arView.session.run(configuration)
             }
             alertController.addAction(restartAction)
@@ -116,63 +136,53 @@ class ViewController: UIViewController, ARSessionDelegate {
         }
     }
     
-    // MARK: - MultipeerSession handlers
-    ///- Tag: ReceivedData
-//    func receivedData(_ data: Data, from peer: MCPeerID) {
-//        // Try to decode the received data and handle it appropriately.
-//        if let videoFrameData = try? JSONDecoder().decode(VideoFrameData.self,
-//            from: data) {
-//            // Reconstruct a sample buffer of the compressed video frame data.
-//            let sampleBuffer = videoFrameData.makeSampleBuffer()
-//            // Decompress the sample buffer and enqueue it for rendering.
-//            videoProcessor.decompress(sampleBuffer) { [self] imageBuffer, presentationTimeStamp in
-//                // Update the PipView aspect ratio to match the camera-image dimensions.
-//                let width = CGFloat(CVPixelBufferGetWidth(imageBuffer))
-//                let height = CGFloat(CVPixelBufferGetHeight(imageBuffer))
-//                overlayViewController?.setPipViewConstraints(width: width, height: height)
-//
-//                overlayViewController?.renderer.enqueueFrame(
-//                    pixelBuffer: imageBuffer,
-//                    presentationTimeStamp: presentationTimeStamp,
-//                    inverseProjectionMatrix: videoFrameData.inverseProjectionMatrix,
-//                    inverseViewMatrix: videoFrameData.inverseViewMatrix)
-//            }
-//        } else if let rayQuery = try? JSONDecoder().decode(Ray.self, from: data) {
-//            DispatchQueue.main.async { [self] in
-//
-//                // Stop tracking the previous trackedRaycast.
-//                trackedRaycast?.stopTracking()
-//
-//                // Replace the previous trackedRaycast.
-//                trackedRaycast = arView.session.trackedRaycast(
-//                    ARRaycastQuery(
-//                        origin: rayQuery.origin,
-//                        direction: rayQuery.direction,
-//                        allowing: .estimatedPlane,
-//                        alignment: .any)
-//                    ) {
-//                    raycastResults in
-//                    if let result = raycastResults.first {
-//                        marker.transform.matrix = result.worldTransform
-//                        marker.isEnabled = true
-//                    }
-//                }
-//            }
-//        }
-//    }
-//
-//    func peerDiscovered(_ peer: MCPeerID) -> Bool {
-//        // Don't accept more than one user in the experience.
-//        multipeerSession.connectedPeers.count < 1
-//    }
-    
-    override var prefersStatusBarHidden: Bool {
-        // If possible, hide the status bar to improve immersiveness of the AR experience.
-        return true
+    func connectSocket(){
+        socket = manager.defaultSocket
+        socket.connect()
+        if(socket.status == .connected){
+            print("소켓 연결 성공")
+        }
     }
     
-    override var prefersHomeIndicatorAutoHidden: Bool {
-        // If possible, hide the Home indicator to improve immersiveness of the AR experience.
-        return true
+    func disconnectSocket(){
+        socket.disconnect()
+        if(socket.status == .disconnected){
+            print("소켓 종료 성공")
+        }
+        
+    }
+    
+    
+    func sendStart(){
+        self.socketStarted = true
+        
+        arView.session.delegate = self
+        print(self.socketStarted)
+        RPScreenRecorder.shared().startCapture {
+            [self] (sampleBuffer, type, error) in
+            if type == .video {
+                guard let currentFrame = arView.session.currentFrame else { return }
+                videoProcessor.compressAndSend(sampleBuffer, arFrame: currentFrame) {
+                    (data) in
+                    
+                    self.socket.emit("data", data)
+                    
+                    
+//                    print(data)
+                        
+                }
+            }
+        }
+    }
+    
+    func stopSend(){
+        RPScreenRecorder.shared().stopCapture{error in
+                print("녹화 종료")
+            if error != nil{
+                print("에러 발생 \(error?.localizedDescription ?? "Unknown Error")")
+            }
+        }
+        self.socketStarted = false
+        print(self.socketStarted)
     }
 }
