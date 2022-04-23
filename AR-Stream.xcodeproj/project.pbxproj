@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,12 +26,15 @@
 		37A0A7032522676A00DFBA63 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A0A7022522676A00DFBA63 /* Ray.swift */; };
 		37A0A7062522679500DFBA63 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A0A7052522679500DFBA63 /* Matrix.swift */; };
 		37F6CC902519648B009031C5 /* VertexDescriptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6CC8F2519648B009031C5 /* VertexDescriptors.swift */; };
+		4AB05F0F9E93BB6930BF70FA /* Pods_AR_Stream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */; };
 		7107E6B22554BC8A0090C21D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7107E6B12554BC8A0090C21D /* README.md */; };
 		80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80557AC325165E3000D9991B /* VideoProcessor.swift */; };
+		BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77E9E92812F6EC007691AE /* SocketIO.framework */; };
+		BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B73E28140C51001DBD39 /* SocketManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		359B406AF60A4A9A36909840 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		359B406AF60A4A9A36909840 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		37791E1B25191AC40016631C /* BufferView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BufferView.swift; sourceTree = "<group>"; };
 		37791E1E25191DED0016631C /* RenderDestination.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderDestination.swift; sourceTree = "<group>"; };
 		37791E2425191EAF0016631C /* PipelineStates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PipelineStates.swift; sourceTree = "<group>"; };
@@ -55,9 +58,14 @@
 		37A0A7022522676A00DFBA63 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		37A0A7052522679500DFBA63 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		37F6CC8F2519648B009031C5 /* VertexDescriptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptors.swift; sourceTree = "<group>"; };
+		484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Stream.release.xcconfig"; path = "Target Support Files/Pods-AR-Stream/Pods-AR-Stream.release.xcconfig"; sourceTree = "<group>"; };
 		7107E6B12554BC8A0090C21D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		80557AC325165E3000D9991B /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
-		BA9B24A90C4C8B3827F050AE /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Stream.debug.xcconfig"; path = "Target Support Files/Pods-AR-Stream/Pods-AR-Stream.debug.xcconfig"; sourceTree = "<group>"; };
+		BA77E9E92812F6EC007691AE /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA9B24A90C4C8B3827F050AE /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		BAB7B73E28140C51001DBD39 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Stream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */,
+				4AB05F0F9E93BB6930BF70FA /* Pods_AR_Stream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,6 +113,8 @@
 				377F30CA24EE351800DA673C /* Products */,
 				CC9ABAAE3BECBE544F331187 /* Configuration */,
 				466D60B1BCA1D1F8E29A301A /* LICENSE */,
+				4956034B236DD07AC852D3B8 /* Pods */,
+				46E5764DB1B49B98EFA599EE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -119,6 +131,7 @@
 			children = (
 				377F30CE24EE351800DA673C /* ViewController.swift */,
 				3796E645251D0B900092F55A /* OverlayViewController.swift */,
+				BAB7B73E28140C51001DBD39 /* SocketManager.swift */,
 				80557AC325165E3000D9991B /* VideoProcessor.swift */,
 				377F30E224EE3F2200DA673C /* MultipeerSession.swift */,
 				377F30E024EE357900DA673C /* VideoFrameData.swift */,
@@ -149,8 +162,25 @@
 			children = (
 				BA9B24A90C4C8B3827F050AE /* LICENSE.txt */,
 			);
-			name = LICENSE;
 			path = LICENSE;
+			sourceTree = "<group>";
+		};
+		46E5764DB1B49B98EFA599EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA77E9E92812F6EC007691AE /* SocketIO.framework */,
+				F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4956034B236DD07AC852D3B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */,
+				484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		CC9ABAAE3BECBE544F331187 /* Configuration */ = {
@@ -168,9 +198,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 377F30DD24EE351A00DA673C /* Build configuration list for PBXNativeTarget "AR-Stream" */;
 			buildPhases = (
+				560B3360B8C31D2706E131F3 /* [CP] Check Pods Manifest.lock */,
 				377F30C524EE351800DA673C /* Sources */,
 				377F30C624EE351800DA673C /* Frameworks */,
 				377F30C724EE351800DA673C /* Resources */,
+				DAE7D789210AE50342EFA78A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,6 +260,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		560B3360B8C31D2706E131F3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AR-Stream-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DAE7D789210AE50342EFA78A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AR-Stream/Pods-AR-Stream-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AR-Stream/Pods-AR-Stream-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AR-Stream/Pods-AR-Stream-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		377F30C524EE351800DA673C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -249,6 +323,7 @@
 				377F30E324EE3F2200DA673C /* MultipeerSession.swift in Sources */,
 				377F30E124EE357900DA673C /* VideoFrameData.swift in Sources */,
 				37A0A7032522676A00DFBA63 /* Ray.swift in Sources */,
+				BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */,
 				37791E2E25192C7B0016631C /* MetalUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,7 +352,7 @@
 /* Begin XCBuildConfiguration section */
 		377F30DB24EE351A00DA673C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 359B406AF60A4A9A36909840 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -339,7 +414,7 @@
 		};
 		377F30DC24EE351A00DA673C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 359B406AF60A4A9A36909840 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -395,47 +470,53 @@
 		};
 		377F30DE24EE351A00DA673C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 359B406AF60A4A9A36909840 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DDN2CH67GY;
 				INFOPLIST_FILE = StreamingARFramesLocally/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.StreamingARFramesLocally${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "StreamingARFramesLocally/SteamingARFramesLocally-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		377F30DF24EE351A00DA673C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 359B406AF60A4A9A36909840 /* SampleCode.xcconfig */;
+			baseConfigurationReference = 484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = DDN2CH67GY;
 				INFOPLIST_FILE = StreamingARFramesLocally/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.StreamingARFramesLocally${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "StreamingARFramesLocally/SteamingARFramesLocally-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

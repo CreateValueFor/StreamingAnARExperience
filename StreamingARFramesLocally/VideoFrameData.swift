@@ -38,6 +38,10 @@ struct VideoFrameData: Codable {
         }
         
         let camera = arFrame.camera
+        let featurePoints = arFrame.rawFeaturePoints
+        let depthMap = arFrame.sceneDepth?.depthMap
+        let caputedImage = arFrame.capturedDepthData
+        
         let width = CVPixelBufferGetWidth(arFrame.capturedImage)
         let height = CVPixelBufferGetHeight(arFrame.capturedImage)
         let viewportSize = CGSize(width: width, height: height)
