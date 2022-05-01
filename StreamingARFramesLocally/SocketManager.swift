@@ -36,6 +36,9 @@ class SocketIOManager: NSObject {
 
         print("소켓 연결 시도")
     }
+    func saveFile(){
+        
+    }
 
     //MARK: 소켓 연결 종료
     func closeConnection() {

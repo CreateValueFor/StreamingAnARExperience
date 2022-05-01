@@ -31,6 +31,7 @@
 		BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77E9E92812F6EC007691AE /* SocketIO.framework */; };
 		BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B73E28140C51001DBD39 /* SocketManager.swift */; };
 		BAB7B74228145DED001DBD39 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74128145DED001DBD39 /* DepthMap.swift */; };
+		BAB7B74428146949001DBD39 /* CVPixelTOCMSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		BA9B24A90C4C8B3827F050AE /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		BAB7B73E28140C51001DBD39 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		BAB7B74128145DED001DBD39 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
+		BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelTOCMSample.swift; sourceTree = "<group>"; };
 		F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Stream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 				377F30D724EE351A00DA673C /* LaunchScreen.storyboard */,
 				377F310B24EECFEF00DA673C /* SteamingARFramesLocally-Bridging-Header.h */,
 				377F30DA24EE351A00DA673C /* Info.plist */,
+				BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */,
 			);
 			path = StreamingARFramesLocally;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				37791E2525191EAF0016631C /* PipelineStates.swift in Sources */,
 				37791E1F25191DED0016631C /* RenderDestination.swift in Sources */,
 				377F310A24EECFDE00DA673C /* Shaders.metal in Sources */,
+				BAB7B74428146949001DBD39 /* CVPixelTOCMSample.swift in Sources */,
 				377F30CF24EE351800DA673C /* ViewController.swift in Sources */,
 				BAB7B74228145DED001DBD39 /* DepthMap.swift in Sources */,
 				37A0A6FF2522672400DFBA63 /* SIMD+Extensions.swift in Sources */,

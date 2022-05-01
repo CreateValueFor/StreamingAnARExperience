@@ -11,6 +11,7 @@ import MetalKit
 import ReplayKit
 import ARKit
 import SocketIO
+import CoreVideo
 
 /// - Tag: ViewController
 class ViewController: UIViewController, ARSessionDelegate {
@@ -19,7 +20,7 @@ class ViewController: UIViewController, ARSessionDelegate {
     @IBOutlet var arView: ARView!
     
     // declare scoket
-    let manager  = SocketManager(socketURL: URL(string:"ws://192.168.0.22:5500")!,config: [.log(true), .compress])
+    let manager  = SocketManager(socketURL: URL(string:"ws://172.20.10.3:5500")!,config: [.log(true), .compress])
     var socket:SocketIOClient!
     var socketStarted =  false
     
@@ -56,46 +57,31 @@ class ViewController: UIViewController, ARSessionDelegate {
         
         UIApplication.shared.isIdleTimerDisabled = true
         connectSocket()
-//        sendStart()
-        
-        
-        
-        
 
         // Configure the scene.
-//        arView.scene.addAnchor(marker)
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Make sure that the app delegate is of type AppDelegate")
         }
         overlayViewController = appDelegate.overlayWindow?.rootViewController as? OverlayViewController
         
         // Start ReplayKit capture and handle receiving video sample buffers.
-    
         RPScreenRecorder.shared().startCapture {
             [self] (sampleBuffer, type, error) in
             if type == .video {
                 guard let currentFrame = arView.session.currentFrame else { return }
-                
-                
-                videoProcessor.compressAndSend(currentFrame.sceneDepth?.depthMap!, arFrame: currentFrame){
-                    (data) in
-                    self.socket.emit("data",data)
-                }
-                
-                
                 videoProcessor.compressAndSend(sampleBuffer, arFrame: currentFrame) {
                     (data) in
-                        guard let depthData = currentFrame.sceneDepth  else {return}
-                        guard let capturedImage = currentFrame.capturedImage else {return}
-//                    let depthMap = DepthMapData(depthData: depthData)
-//                    let jsonDepthMap =  JSONSerialization.jsonObject(with: depthData.depthMap)
-                    print(depthData.depthMap)
-//                        self.socket.emit("data", data)
 
-//                    self.socket.emit("data",depthData)
+                    guard let depthMap = currentFrame.sceneDepth?.depthMap else {return}
                     
-
-                    
+                    CVPixelBufferLockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0));
+                    let bytesPerRow = CVPixelBufferGetBytesPerRow(depthMap)
+                    let height = CVPixelBufferGetHeight(depthMap)
+                    if let srcBuffer = CVPixelBufferGetBaseAddress(depthMap) {
+                        let data = Data(bytes: srcBuffer, count: bytesPerRow * height)
+                        self.socket.emit("data",data)
+                    }
+                    CVPixelBufferUnlockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0))
 
                 }
             }
@@ -103,10 +89,6 @@ class ViewController: UIViewController, ARSessionDelegate {
     }
     
     // MARK: - ARSessionDelegate
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        <#code#>
-    }
-    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user.
         guard error is ARError else { return }
@@ -136,19 +118,33 @@ class ViewController: UIViewController, ARSessionDelegate {
         }
     }
     
+    
+    
+    // 소켓
     func connectSocket(){
+        
         socket = manager.defaultSocket
         socket.connect()
-        if(socket.status == .connected){
-            print("소켓 연결 성공")
-        }
+//        if(socket.status == .connected){
+//
+//        }else{
+//
+//        }
+//
+        
+//        if(socket.status == .connected){
+//            print("소켓 연결 성공")
+//        }
+        
     }
     
     func disconnectSocket(){
-        socket.disconnect()
-        if(socket.status == .disconnected){
-            print("소켓 종료 성공")
-        }
+        socket = manager.defaultSocket
+        socket.emit("save")
+//        socket.disconnect()
+//        if(socket.status == .disconnected){
+//            print("소켓 종료 성공")
+//        }
         
     }
     
@@ -185,4 +181,35 @@ class ViewController: UIViewController, ARSessionDelegate {
         self.socketStarted = false
         print(self.socketStarted)
     }
+}
+
+extension Data {
+public static func from(pixelBuffer: CVPixelBuffer) -> Self {
+    CVPixelBufferLockBaseAddress(pixelBuffer, [.readOnly])
+    defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, [.readOnly]) }
+
+    // Calculate sum of planes' size
+    var totalSize = 0
+    for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+        let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+        let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+        let planeSize   = height * bytesPerRow
+        totalSize += planeSize
+    }
+
+    guard let rawFrame = malloc(totalSize) else { fatalError() }
+    var dest = rawFrame
+
+    for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+        let source      = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, plane)
+        let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+        let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+        let planeSize   = height * bytesPerRow
+
+        memcpy(dest, source, planeSize)
+        dest += planeSize
+    }
+
+    return Data(bytesNoCopy: rawFrame, count: totalSize, deallocator: .free)
+}
 }
