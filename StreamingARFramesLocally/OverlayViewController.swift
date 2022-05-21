@@ -52,7 +52,7 @@ class OverlayViewController: UIViewController {
     
     @IBAction func disConnectSocket(_ sender: UIButton) {
         
-        delegate?.disconnectSocket()
+        delegate?.emitSave()
     }
     @IBAction func sendStart(_ sender: UIButton) {
         // 소켓 송신 구현

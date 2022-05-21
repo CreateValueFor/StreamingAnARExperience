@@ -20,10 +20,8 @@ class ViewController: UIViewController, ARSessionDelegate {
     @IBOutlet var arView: ARView!
     
     // declare scoket
-//    var manager : SocketManager!
-    let manager = SocketManager(socketURL: URL(string:"ws://172.20.10.3:5500")!,config: [.log(true), .compress])
+    let manager  = SocketManager(socketURL: URL(string:"ws://192.168.0.4:5500")!,config: [.log(true), .compress])
     var socket:SocketIOClient!
-    var socketIP: String!
     var socketStarted =  false
     
     
@@ -40,21 +38,38 @@ class ViewController: UIViewController, ARSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // 화면 잠금 방지
-        UIApplication.shared.isIdleTimerDisabled = true
+        func buildConfigure() -> ARWorldTrackingConfiguration {
+            let configuration = ARWorldTrackingConfiguration()
+
+            configuration.environmentTexturing = .automatic
+            if type(of: configuration).supportsFrameSemantics(.sceneDepth) {
+               configuration.frameSemantics = .sceneDepth
+            }
+
+            return configuration
+        }
+        super.viewDidLoad()
         
+        arView.session.delegate = self
+        let configuration = buildConfigure()
+        arView.session.run(configuration)
+        
+        
+        UIApplication.shared.isIdleTimerDisabled = true
+        connectSocket()
+
         // Configure the scene.
+
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             fatalError("Make sure that the app delegate is of type AppDelegate")
         }
         overlayViewController = appDelegate.overlayWindow?.rootViewController as? OverlayViewController
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+//            self.arView.session.pause()
+//            self.socket.emit("save")
+//        }
         
-//        arView.session.delegate = self
-//        let configuration = buildConfigure()
-//        arView.session.run(configuration)
-        connectSocket()
-        
-//         Start ReplayKit capture and handle receiving video sample buffers.
+        // Start ReplayKit capture and handle receiving video sample buffers.
         RPScreenRecorder.shared().startCapture {
             [self] (sampleBuffer, type, error) in
             if type == .video {
@@ -63,7 +78,7 @@ class ViewController: UIViewController, ARSessionDelegate {
                     (data) in
 
                     guard let depthMap = currentFrame.sceneDepth?.depthMap else {return}
-
+                    
                     CVPixelBufferLockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0));
                     let bytesPerRow = CVPixelBufferGetBytesPerRow(depthMap)
                     let height = CVPixelBufferGetHeight(depthMap)
@@ -76,40 +91,6 @@ class ViewController: UIViewController, ARSessionDelegate {
                 }
             }
         }
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        
-    }
-    
-    func buildConfigure() -> ARWorldTrackingConfiguration {
-        let configuration = ARWorldTrackingConfiguration()
-
-        configuration.environmentTexturing = .automatic
-        if type(of: configuration).supportsFrameSemantics(.sceneDepth) {
-           configuration.frameSemantics = .sceneDepth
-        }
-
-        return configuration
-    }
-    
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        guard let currentFrame = arView.session.currentFrame else { return }
-       
-       guard let depthMap = currentFrame.sceneDepth?.depthMap else {return}
-
-       CVPixelBufferLockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0));
-       let bytesPerRow = CVPixelBufferGetBytesPerRow(depthMap)
-       let height = CVPixelBufferGetHeight(depthMap)
-       if let srcBuffer = CVPixelBufferGetBaseAddress(depthMap) {
-           let data = Data(bytes: srcBuffer, count: bytesPerRow * height)
-           socket = manager.defaultSocket
-           socket.connect()
-           socket.emit("data",data)
-       }
-       CVPixelBufferUnlockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0))
-
-   
-
     }
     
     // MARK: - ARSessionDelegate
@@ -133,8 +114,8 @@ class ViewController: UIViewController, ARSessionDelegate {
                 }
                 print(configuration.frameSemantics)
                 configuration.frameSemantics.insert(.sceneDepth)
-
-
+                
+                
                 arView.session.run(configuration)
             }
             alertController.addAction(restartAction)
@@ -142,46 +123,20 @@ class ViewController: UIViewController, ARSessionDelegate {
         }
     }
     
-    // 인풋 필드에서 IP 값 가져오기
-//    func getInternalIP(socketIP: String ){
-//        print(socketIP)
-//        manager  = SocketManager(socketURL: URL(string:socketIP)!,config: [.log(true), .compress])
-//        socket = manager.defaultSocket
-//        socket.connect()
-//        arView.session.delegate = self
-//        let configuration = self.buildConfigure()
-//        arView.session.run(configuration)
-//
-//    }
+    
     
     // 소켓
+    
     func connectSocket(){
         
         socket = manager.defaultSocket
         socket.connect()
-//        if(socket.status == .connected){
-//
-//        }else{
-//
-//        }
-//
-        
-//        if(socket.status == .connected){
-//            print("소켓 연결 성공")
-//        }
         
     }
     
-    func disconnectSocket(){
+    func emitSave(){
         socket = manager.defaultSocket
-        
-        if(socket.status == .connected){
-            print("소켓 연결 상태 좋음")
-        }else{
-            print("소켓 연결 안 됨")
-        }
         socket.emit("save")
-        
 //        socket.disconnect()
 //        if(socket.status == .disconnected){
 //            print("소켓 종료 성공")
@@ -222,4 +177,35 @@ class ViewController: UIViewController, ARSessionDelegate {
         self.socketStarted = false
         print(self.socketStarted)
     }
+}
+
+extension Data {
+public static func from(pixelBuffer: CVPixelBuffer) -> Self {
+    CVPixelBufferLockBaseAddress(pixelBuffer, [.readOnly])
+    defer { CVPixelBufferUnlockBaseAddress(pixelBuffer, [.readOnly]) }
+
+    // Calculate sum of planes' size
+    var totalSize = 0
+    for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+        let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+        let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+        let planeSize   = height * bytesPerRow
+        totalSize += planeSize
+    }
+
+    guard let rawFrame = malloc(totalSize) else { fatalError() }
+    var dest = rawFrame
+
+    for plane in 0 ..< CVPixelBufferGetPlaneCount(pixelBuffer) {
+        let source      = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, plane)
+        let height      = CVPixelBufferGetHeightOfPlane(pixelBuffer, plane)
+        let bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, plane)
+        let planeSize   = height * bytesPerRow
+
+        memcpy(dest, source, planeSize)
+        dest += planeSize
+    }
+
+    return Data(bytesNoCopy: rawFrame, count: totalSize, deallocator: .free)
+}
 }
