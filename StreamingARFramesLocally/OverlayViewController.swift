@@ -25,13 +25,12 @@ class OverlayViewController: UIViewController {
         let alert = UIAlertController(title: "서버 주소를 입력해주세요", message: "textField", preferredStyle: .alert)
         alert.addTextField{(textField) in
             
-            textField.placeholder = "ex) ws.172.20.10.3:5000"
+            textField.placeholder = "ex) ws://172.20.10.3:5000"
         }
         let ok = UIAlertAction(title: "OK", style: .default){ (ok) in
-            print("ok 눌림")
             guard let socketIP = alert.textFields?[0].text else {return}
             
-//            self.delegate?.getInternalIP(socketIP: socketIP)
+            self.delegate?.getInternalIP(socketIP: socketIP)
         }
         
         let cancel = UIAlertAction(title: "cancel", style: .cancel){ (cancel) in
@@ -42,7 +41,7 @@ class OverlayViewController: UIViewController {
         }
         alert.addAction(ok)
         alert.addAction(cancel)
-//        self.present(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func connectSocket(_ sender: UIButton) {

@@ -29,9 +29,8 @@
 		7107E6B22554BC8A0090C21D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7107E6B12554BC8A0090C21D /* README.md */; };
 		80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80557AC325165E3000D9991B /* VideoProcessor.swift */; };
 		BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77E9E92812F6EC007691AE /* SocketIO.framework */; };
-		BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B73E28140C51001DBD39 /* SocketManager.swift */; };
-		BAB7B74228145DED001DBD39 /* DepthMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74128145DED001DBD39 /* DepthMap.swift */; };
 		BAB7B74428146949001DBD39 /* CVPixelTOCMSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */; };
+		BAFD1F78283B18C50016E6DB /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFD1F77283B18C50016E6DB /* Socket.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,9 +63,8 @@
 		9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Stream.debug.xcconfig"; path = "Target Support Files/Pods-AR-Stream/Pods-AR-Stream.debug.xcconfig"; sourceTree = "<group>"; };
 		BA77E9E92812F6EC007691AE /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9B24A90C4C8B3827F050AE /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
-		BAB7B73E28140C51001DBD39 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
-		BAB7B74128145DED001DBD39 /* DepthMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthMap.swift; sourceTree = "<group>"; };
 		BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelTOCMSample.swift; sourceTree = "<group>"; };
+		BAFD1F77283B18C50016E6DB /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
 		F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Stream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -131,10 +129,9 @@
 		377F30CB24EE351800DA673C /* StreamingARFramesLocally */ = {
 			isa = PBXGroup;
 			children = (
-				BAB7B74128145DED001DBD39 /* DepthMap.swift */,
 				377F30CE24EE351800DA673C /* ViewController.swift */,
 				3796E645251D0B900092F55A /* OverlayViewController.swift */,
-				BAB7B73E28140C51001DBD39 /* SocketManager.swift */,
+				BAFD1F77283B18C50016E6DB /* Socket.swift */,
 				80557AC325165E3000D9991B /* VideoProcessor.swift */,
 				377F30E024EE357900DA673C /* VideoFrameData.swift */,
 				37A0A6FD2522670F00DFBA63 /* Utilities */,
@@ -318,8 +315,8 @@
 				37791E1F25191DED0016631C /* RenderDestination.swift in Sources */,
 				377F310A24EECFDE00DA673C /* Shaders.metal in Sources */,
 				BAB7B74428146949001DBD39 /* CVPixelTOCMSample.swift in Sources */,
+				BAFD1F78283B18C50016E6DB /* Socket.swift in Sources */,
 				377F30CF24EE351800DA673C /* ViewController.swift in Sources */,
-				BAB7B74228145DED001DBD39 /* DepthMap.swift in Sources */,
 				37A0A6FF2522672400DFBA63 /* SIMD+Extensions.swift in Sources */,
 				377F310D24EED11800DA673C /* Renderer.swift in Sources */,
 				80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */,
@@ -327,7 +324,6 @@
 				377F30CD24EE351800DA673C /* AppDelegate.swift in Sources */,
 				377F30E124EE357900DA673C /* VideoFrameData.swift in Sources */,
 				37A0A7032522676A00DFBA63 /* Ray.swift in Sources */,
-				BAB7B73F28140C51001DBD39 /* SocketManager.swift in Sources */,
 				37791E2E25192C7B0016631C /* MetalUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +484,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.StreamingARFramesLocally${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -514,6 +511,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.StreamingARFramesLocally${SAMPLE_CODE_DISAMBIGUATOR}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
