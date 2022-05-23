@@ -11,7 +11,7 @@ import SocketIO
 
 class SocketIOManager: NSObject {
 
-    static var sharedInstance = SocketIOManager(socketURL: "172.20.10.3:5500")
+//    static var sharedInstance = SocketIOManager(socketURL: "172.20.10.3:5500")
     
     //서버에서 메시지를 주고받을 수 있게 해주는 Socket.IO의 기본 클래스
 //    var manager = SocketManager(socketURL: URL(string: "localhost...:3000")!, config: [.log(true) , .compress])
@@ -24,7 +24,7 @@ class SocketIOManager: NSObject {
         manager = SocketManager(socketURL: URL(string:"ws://\(socketURL):5500")!,config: [.log(true), .compress])
         
         socket = self.manager.defaultSocket
-        SocketIOManager.sharedInstance = SocketIOManager(socketURL: socketURL)
+//        SocketIOManager.sharedInstance = SocketIOManager(socketURL: socketURL)
         
         print("소켓 초기화 완료")
         
@@ -34,8 +34,11 @@ class SocketIOManager: NSObject {
     func establishConnection() {
         
         socket.connect()
-
+        socket.on("server_msg") { (dataArray, ack) in
+            print(dataArray)
+        }
         print("소켓 연결 시도")
+        addController()
     }
 
     //MARK: 소켓 연결 종료
@@ -45,7 +48,48 @@ class SocketIOManager: NSObject {
 
         print("소켓 연결 종료")
     }
+    
+    
+    //MARK: 메세지 ㅗ보내기
+    func sendMessage(msg: String){
+        socket.emit("client_msg", msg)
+        
+    }
+    
+    func checkStreaming(data : Data){
+        socket.emit("check")
+        socket.on("check"){
+            bool , _ in
+            
+            if(bool[0] as! Int == 1){
+                self.socket.emit("data",data)
+            }else{
+                print("소켓 종료됨")
+            }
+            
+            
+        }
+    }
 
+    //MARK : 데이터 보내기
+    func sendData(data: Data){
+        socket.emit("data",data)
+    }
+    
+    func addController(){
+        socket.on("connect"){ _, _ in
+            print("socket connected")
+            self.socket.emit("client_msg","소켓 연결됨")
+            
+        }
+        print("controller 생성")
+        socket.on("start"){
+            (data, ack) in
+            print("소켓 시작됨");
+        }
+        
+    }
+    
     
     //MARK: 유저 채팅방에 연결
     func connectToServerWithNickname(nickname:String ,

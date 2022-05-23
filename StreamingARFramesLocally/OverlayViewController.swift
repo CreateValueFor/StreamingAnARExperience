@@ -22,10 +22,10 @@ class OverlayViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let alert = UIAlertController(title: "서버 주소를 입력해주세요", message: "textField", preferredStyle: .alert)
+        let alert = UIAlertController(title: "서버 주소를 입력해주세요", message: "", preferredStyle: .alert)
         alert.addTextField{(textField) in
             
-            textField.placeholder = "ex) ws://172.20.10.3:5000"
+            textField.placeholder = "ex) 172.20.10.3"
         }
         let ok = UIAlertAction(title: "OK", style: .default){ (ok) in
             guard let socketIP = alert.textFields?[0].text else {return}
@@ -46,12 +46,12 @@ class OverlayViewController: UIViewController {
     
     @IBAction func connectSocket(_ sender: UIButton) {
         // 소켓 연결 구현
-        delegate?.connectSocket()
+        delegate?.socketManager.establishConnection()
     }
     
     @IBAction func disConnectSocket(_ sender: UIButton) {
         
-        delegate?.emitSave()
+        delegate?.socketManager.closeConnection()
     }
     @IBAction func sendStart(_ sender: UIButton) {
         // 소켓 송신 구현

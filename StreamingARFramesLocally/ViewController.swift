@@ -6,12 +6,11 @@ The main ViewController of the sample app.
 */
 
 import RealityKit
-import MultipeerConnectivity
-import MetalKit
-import ReplayKit
+
+
 import ARKit
 import SocketIO
-import CoreVideo
+
 
 /// - Tag: ViewController
 class ViewController: UIViewController, ARSessionDelegate {
@@ -19,13 +18,8 @@ class ViewController: UIViewController, ARSessionDelegate {
     // MARK: - Properties
     @IBOutlet var arView: ARView!
     
-    
-    // declare scoket
-    var manager: SocketManager!
-//    let manager  = SocketManager(socketURL: URL(string:"ws://172.20.10.3:5500")!,config: [.log(true), .compress])
-    var socket:SocketIOClient!
-    
-    
+    var socketManager : SocketIOManager!
+//    var socketManager = SocketIOManager(socketURL: "172.20.10.3");
     
     weak var overlayViewController: OverlayViewController?
 
@@ -41,7 +35,9 @@ class ViewController: UIViewController, ARSessionDelegate {
         
         
         UIApplication.shared.isIdleTimerDisabled = true
-//        connectSocket()
+//        socketManager.establishConnection()
+        
+    
 
         // Configure the scene.
 
@@ -56,14 +52,18 @@ class ViewController: UIViewController, ARSessionDelegate {
         
         guard let depthMap = frame.sceneDepth?.depthMap else {return}
         
+        
+        
         CVPixelBufferLockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0));
         let bytesPerRow = CVPixelBufferGetBytesPerRow(depthMap)
         let height = CVPixelBufferGetHeight(depthMap)
         if let srcBuffer = CVPixelBufferGetBaseAddress(depthMap) {
             let data = Data(bytes: srcBuffer, count: bytesPerRow * height)
-            if(socket != nil){
-                socket.emit("data",data)
+            if(socketManager != nil){
+                socketManager.checkStreaming(data: data)
             }
+            
+            
             
         }
         CVPixelBufferUnlockBaseAddress(depthMap, CVPixelBufferLockFlags(rawValue: 0))
@@ -82,44 +82,31 @@ class ViewController: UIViewController, ARSessionDelegate {
     
     
     // 소켓
-    
-    func connectSocket(){
-        print("소켓연결시작")
-        socket = manager.defaultSocket
-        socket.connect()
+    func getInternalIP(socketIP : String){
+        socketManager = SocketIOManager.init(socketURL: socketIP)
+        socketManager.establishConnection()
+        sendStart()
+        
         
     }
-    
-    func emitSave(){
-        socket = manager.defaultSocket
-
-        socket.disconnect()
-        if(socket.status == .disconnected){
-            print("소켓 종료 성공")
-        }
-        
-    }
-    
     
     func sendStart(){
-        arView = ARView(frame: .zero, cameraMode: .ar, automaticallyConfigureSession: false)
-        self.arView.session.delegate = self
+        let bounds: CGRect = UIScreen.main.bounds
+        
+        arView = ARView.init(frame: bounds)
+        arView.session.delegate = self
         let configuration = buildConfigure()
-        self.arView.session.run(configuration)
+        
+        arView.session.run(configuration)
+        
+        
+        
+        
     }
-    
     func stopSend(){
-        self.arView.session.pause()
-        
-        socket.emit("save")
-        socket.disconnect()
+        arView.session.pause()
     }
     
-    func getInternalIP(socketIP : String){
-        manager = SocketManager(socketURL: URL(string:"ws://\(socketIP):5500")!,config: [.log(true), .compress])
-        connectSocket()
-        
-    }
     
     
 }
