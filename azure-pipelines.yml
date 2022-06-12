@@ -11,7 +11,9 @@ pool:
 
 steps:
 - task: CocoaPods@0
-  displayName: 'pod install using the CocoaPods task with defaults'
+  inputs:
+    forceRepoUpdate: true
+  
 - task: Xcode@5
   inputs:
     actions: 'build'
