@@ -10,9 +10,14 @@ pool:
   vmImage: 'macos-latest'
 
 steps:
-- task: CocoaPods@0
+- task: Cache@2
   inputs:
-    forceRepoUpdate: true
+    key: 'pods | "$(Agent.OS)" | Podfile.lock'
+    path: 'Pods'
+    cacheHitVar: 'PODS_CACHE_RESTORED'
+- task: CocoaPods@0
+  displayName: 'pod install using the CocoaPods task with defaults'
+  condition: ne(variables.PODS_CACHE_RESTORED, 'true')
   
 - task: Xcode@5
   inputs:
