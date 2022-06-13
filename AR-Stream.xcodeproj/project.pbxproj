@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -28,6 +28,7 @@
 		4AB05F0F9E93BB6930BF70FA /* Pods_AR_Stream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */; };
 		7107E6B22554BC8A0090C21D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7107E6B12554BC8A0090C21D /* README.md */; };
 		80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80557AC325165E3000D9991B /* VideoProcessor.swift */; };
+		BA45736228578CC300F76F03 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = BA45736128578CC300F76F03 /* SocketIO */; };
 		BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77E9E92812F6EC007691AE /* SocketIO.framework */; };
 		BAB7B74428146949001DBD39 /* CVPixelTOCMSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */; };
 		BAFD1F78283B18C50016E6DB /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFD1F77283B18C50016E6DB /* Socket.swift */; };
@@ -75,6 +76,7 @@
 			files = (
 				BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */,
 				4AB05F0F9E93BB6930BF70FA /* Pods_AR_Stream.framework in Frameworks */,
+				BA45736228578CC300F76F03 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +211,9 @@
 			dependencies = (
 			);
 			name = "AR-Stream";
+			packageProductDependencies = (
+				BA45736128578CC300F76F03 /* SocketIO */,
+			);
 			productName = StreamingARFramesLocally;
 			productReference = 377F30C924EE351800DA673C /* AR-Stream.app */;
 			productType = "com.apple.product-type.application";
@@ -237,6 +242,9 @@
 				Base,
 			);
 			mainGroup = 377F30C024EE351800DA673C;
+			packageReferences = (
+				BA45736028578CC300F76F03 /* XCRemoteSwiftPackageReference "socket" */,
+			);
 			productRefGroup = 377F30CA24EE351800DA673C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -544,6 +552,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BA45736028578CC300F76F03 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BA45736128578CC300F76F03 /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BA45736028578CC300F76F03 /* XCRemoteSwiftPackageReference "socket" */;
+			productName = SocketIO;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 377F30C124EE351800DA673C /* Project object */;
 }
