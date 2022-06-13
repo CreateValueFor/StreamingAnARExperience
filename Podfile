@@ -6,5 +6,4 @@ target 'AR-Stream' do
   use_frameworks!
 
   # Pods for AR-Stream
- pod 'Socket.IO-Client-Swift','~> 16.0.0'
 end

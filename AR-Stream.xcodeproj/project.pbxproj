@@ -25,11 +25,9 @@
 		37A0A7032522676A00DFBA63 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A0A7022522676A00DFBA63 /* Ray.swift */; };
 		37A0A7062522679500DFBA63 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A0A7052522679500DFBA63 /* Matrix.swift */; };
 		37F6CC902519648B009031C5 /* VertexDescriptors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F6CC8F2519648B009031C5 /* VertexDescriptors.swift */; };
-		4AB05F0F9E93BB6930BF70FA /* Pods_AR_Stream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */; };
 		7107E6B22554BC8A0090C21D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7107E6B12554BC8A0090C21D /* README.md */; };
 		80557AC425165E3000D9991B /* VideoProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80557AC325165E3000D9991B /* VideoProcessor.swift */; };
-		BA45736228578CC300F76F03 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = BA45736128578CC300F76F03 /* SocketIO */; };
-		BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BA77E9E92812F6EC007691AE /* SocketIO.framework */; };
+		BA45736528578E0100F76F03 /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = BA45736428578E0100F76F03 /* SocketIO */; };
 		BAB7B74428146949001DBD39 /* CVPixelTOCMSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */; };
 		BAFD1F78283B18C50016E6DB /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAFD1F77283B18C50016E6DB /* Socket.swift */; };
 /* End PBXBuildFile section */
@@ -58,15 +56,12 @@
 		37A0A7022522676A00DFBA63 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		37A0A7052522679500DFBA63 /* Matrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Matrix.swift; sourceTree = "<group>"; };
 		37F6CC8F2519648B009031C5 /* VertexDescriptors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexDescriptors.swift; sourceTree = "<group>"; };
-		484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Stream.release.xcconfig"; path = "Target Support Files/Pods-AR-Stream/Pods-AR-Stream.release.xcconfig"; sourceTree = "<group>"; };
 		7107E6B12554BC8A0090C21D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		80557AC325165E3000D9991B /* VideoProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProcessor.swift; sourceTree = "<group>"; };
-		9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AR-Stream.debug.xcconfig"; path = "Target Support Files/Pods-AR-Stream/Pods-AR-Stream.debug.xcconfig"; sourceTree = "<group>"; };
 		BA77E9E92812F6EC007691AE /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SocketIO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA9B24A90C4C8B3827F050AE /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		BAB7B74328146949001DBD39 /* CVPixelTOCMSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVPixelTOCMSample.swift; sourceTree = "<group>"; };
 		BAFD1F77283B18C50016E6DB /* Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
-		F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AR_Stream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BA77E9EA2812F6EC007691AE /* SocketIO.framework in Frameworks */,
-				4AB05F0F9E93BB6930BF70FA /* Pods_AR_Stream.framework in Frameworks */,
-				BA45736228578CC300F76F03 /* SocketIO in Frameworks */,
+				BA45736528578E0100F76F03 /* SocketIO in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +164,6 @@
 			isa = PBXGroup;
 			children = (
 				BA77E9E92812F6EC007691AE /* SocketIO.framework */,
-				F39173663DC1A0C2ED7ACCE5 /* Pods_AR_Stream.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -179,8 +171,6 @@
 		4956034B236DD07AC852D3B8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */,
-				484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -200,11 +190,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 377F30DD24EE351A00DA673C /* Build configuration list for PBXNativeTarget "AR-Stream" */;
 			buildPhases = (
-				560B3360B8C31D2706E131F3 /* [CP] Check Pods Manifest.lock */,
 				377F30C524EE351800DA673C /* Sources */,
 				377F30C624EE351800DA673C /* Frameworks */,
 				377F30C724EE351800DA673C /* Resources */,
-				DAE7D789210AE50342EFA78A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,7 +200,7 @@
 			);
 			name = "AR-Stream";
 			packageProductDependencies = (
-				BA45736128578CC300F76F03 /* SocketIO */,
+				BA45736428578E0100F76F03 /* SocketIO */,
 			);
 			productName = StreamingARFramesLocally;
 			productReference = 377F30C924EE351800DA673C /* AR-Stream.app */;
@@ -244,6 +232,7 @@
 			mainGroup = 377F30C024EE351800DA673C;
 			packageReferences = (
 				BA45736028578CC300F76F03 /* XCRemoteSwiftPackageReference "socket" */,
+				BA45736328578E0100F76F03 /* XCRemoteSwiftPackageReference "socket" */,
 			);
 			productRefGroup = 377F30CA24EE351800DA673C /* Products */;
 			projectDirPath = "";
@@ -267,48 +256,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		560B3360B8C31D2706E131F3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AR-Stream-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DAE7D789210AE50342EFA78A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AR-Stream/Pods-AR-Stream-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AR-Stream/Pods-AR-Stream-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AR-Stream/Pods-AR-Stream-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		377F30C524EE351800DA673C /* Sources */ = {
@@ -360,7 +307,6 @@
 /* Begin XCBuildConfiguration section */
 		377F30DB24EE351A00DA673C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -422,7 +368,6 @@
 		};
 		377F30DC24EE351A00DA673C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -478,9 +423,7 @@
 		};
 		377F30DE24EE351A00DA673C /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9A795B35FA421B8B41309B85 /* Pods-AR-Stream.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -505,9 +448,7 @@
 		};
 		377F30DF24EE351A00DA673C /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 484F9A9693769AEA0ACF98EC /* Pods-AR-Stream.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ALWAYS_SEARCH_USER_PATHS = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -562,10 +503,18 @@
 				kind = branch;
 			};
 		};
+		BA45736328578E0100F76F03 /* XCRemoteSwiftPackageReference "socket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BA45736128578CC300F76F03 /* SocketIO */ = {
+		BA45736428578E0100F76F03 /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BA45736028578CC300F76F03 /* XCRemoteSwiftPackageReference "socket" */;
 			productName = SocketIO;
