@@ -10,14 +10,14 @@ pool:
   vmImage: 'macos-latest'
 
 steps:
-- task: Cache@2
-  inputs:
-    key: 'pods | "$(Agent.OS)" | Podfile.lock'
-    path: 'Pods'
-    cacheHitVar: 'PODS_CACHE_RESTORED'
-- task: CocoaPods@0
-  displayName: 'pod install using the CocoaPods task with defaults'
-  condition: ne(variables.PODS_CACHE_RESTORED, 'true')
+# - task: Cache@2
+#   inputs:
+#     key: 'pods | "$(Agent.OS)" | Podfile.lock'
+#     path: 'Pods'
+#     cacheHitVar: 'PODS_CACHE_RESTORED'
+# - task: CocoaPods@0
+#   displayName: 'pod install using the CocoaPods task with defaults'
+#   condition: ne(variables.PODS_CACHE_RESTORED, 'true')
   
 - task: Xcode@5
   inputs:
@@ -25,5 +25,5 @@ steps:
     scheme: ''
     sdk: 'iphoneos'
     configuration: 'Release'
-    xcWorkspacePath: '**/*.xcodeproj/project.xcodeproj'
+    xcWorkspacePath: '**/*.xcodeproj'
     xcodeVersion: 'default' # Options: 8, 9, 10, 11, 12, default, specifyPath
